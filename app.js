@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3002
+const port = 3000
 const restaurantsList = require('./restaurants.json')
 // require express-handlebars here
 const exphbs = require('express-handlebars')
