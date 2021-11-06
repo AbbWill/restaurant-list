@@ -32,10 +32,12 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 
-// routes setting
+// routes setting 
+// 首頁路由
 app.get('/', (req, res) => { 
   Restaurant.find()
   .lean()
+  .sort({ _id: 'asc'})
   .then(restaurants => res.render('index', { restaurants }))
   .catch(error => console.log(error))
   })
