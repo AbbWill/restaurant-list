@@ -66,7 +66,10 @@
                   href="/restaurants/{{this._id}}"
                   role="button"
                 >Detail</a>
-                <form action="/restaurants/{{this._id}}/delete" method="POST">
+                <form
+                  action="/restaurants/{{this._id}}?_method=DELETE"
+                  method="POST"
+                >
                   <button
                     type="submit"
                     class="btn btn-danger ml-2"

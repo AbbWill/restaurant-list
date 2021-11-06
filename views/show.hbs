@@ -51,7 +51,10 @@
           role="button"
         >Edit</a>
         <a class="btn btn-info mx-2" href="/" role="button">Back</a>
-        <form action="/restaurants/{{restaurants._id}}/delete" method="POST">
+        <form
+          action="/restaurants/{{restaurants._id}}?_method=DELETE"
+          method="POST"
+        >
           <button type="submit" class="btn btn-danger mx-2">Delete</button>
         </form>
       </div>

@@ -5,6 +5,8 @@ const restaurantsList = require('./restaurants.json')
 // require express-handlebars here
 const exphbs = require('express-handlebars')
 
+const methodOverride = require('method-override')
+
 const Restaurant = require('./models/restaurant')
 
 const mongoose = require('mongoose')
@@ -31,6 +33,9 @@ app.use(express.static('public'))
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
+
+app.use(methodOverride('_method'))
+// 只要帶上_method這個參數 method後面的內容就會轉換成使用的http方法
 
 // routes setting 
 // 首頁路由
@@ -72,7 +77,6 @@ app.get('/restaurants/:id', (req, res) => {
   })
 
 
-
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -81,7 +85,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
   .catch(error => console.log('error!!'))
   })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const name = req.body.name
   const name_en = req.body.name_en
@@ -110,7 +114,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
   })
 
 
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
     const id = req.params.id
     return Restaurant.findById(id)
     .then(restaurants => restaurants.remove())
